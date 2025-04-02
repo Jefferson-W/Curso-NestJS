@@ -19,8 +19,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() { email, name, password }: CreateUserDTO) {
-    return this.userService.create({ email, name, password });
+  async create(@Body() { email, name, password, birthAt }: CreateUserDTO) {
+    return this.userService.create({ email, name, password, birthAt });
   }
 
   @Get()
@@ -47,10 +47,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id) {
-    return await {
-      method: 'DELETE',
-      id,
-    };
+  async delete(@Param('id', ParseIntPipe) id) {
+    return await this.userService.delete(id);
   }
 }
